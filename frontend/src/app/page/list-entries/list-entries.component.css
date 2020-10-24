@@ -1,0 +1,5 @@
+i:hover {
+  cursor: pointer;
+  color: #196F3D;
+  transition: 0.3s;
+}

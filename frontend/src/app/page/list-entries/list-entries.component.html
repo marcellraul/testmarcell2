@@ -1,0 +1,80 @@
+<ngx-spinner></ngx-spinner>
+
+
+<div class="container mt-4">
+    <div class="d-flex m-4">
+        <button class="btn btn-success btn-sm rounded mr-auto" data-toggle="modal" data-target="#exampleModal"
+            data-whatever="@mdo">New</button>
+        <h1 class="mr-auto text-primary text-center">Entries List</h1>
+
+    </div>
+    <div class="col">
+        <table class="table table-hover table-bordered">
+            <thead class="success">
+                <tr class="table-primary">
+                    <th class="success" scope="col">ID</th>
+                    <th class="success" scope="col">Nombre</th>
+                    <th class="success" scope="col">Descripcion</th>
+                    <th class="success" scope="col">Fecha Creado</th>
+                    <th class="success" scope="col">Operaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-active"
+                    *ngFor="let e of entries | paginate: { itemsPerPage: 5, currentPage: p, totalItems: total }">
+                    <td>{{e.cod}}</td>
+                    <td>{{e.name}}</td>
+                    <td>{{e.desc}}</td>
+                    <td>{{e.createdAt |  date:'short' }}</td>
+                    <td>
+                        <a class="m-2" (click)="SelectedEntrie(e._id)">
+                            <i class=" material-icons">visibility</i>
+                        </a>
+                        <a (click)="deleteProduct(e,i)" class="m-2">
+                            <i class="material-icons">delete</i>
+                        </a>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+            <pagination-controls (pageChange)="p = $event">...</pagination-controls>
+        </div>
+        <!---
+            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+        -->
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Entrie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="myForm" (ngSubmit)="SaveEntrie()">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Name:</label>
+                            <input formControlName="name" type="text" class="form-control" placeholder="Name here!"
+                                name="name" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Description:</label>
+                            <textarea class="form-control" formControlName="desc" id="desc" name="desc"
+                                placeholder="Description here!"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success btn-sm">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

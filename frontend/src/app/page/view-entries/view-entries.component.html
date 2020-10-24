@@ -1,0 +1,44 @@
+<div class="container" *ngIf="!entries; else main_content">
+    <div class="text-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<ng-template #main_content>
+    <div class="container  mt-4">
+        <div class="d-flex m-4">
+            <button class="btn btn-outline-success btn-sm rounded mr-auto" (click)="onClick()"> <i
+                    class="material-icons btn-outline-primary">arrow_back</i>
+            </button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="d-flex justify-content-center">...
+            <div class="card border-success mb-3" style="max-width: 20rem;">
+                <div class="card-header text-center">Edit Entrie</div>
+                <form [formGroup]="myForm" (ngSubmit)="SaveEntrie()">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">ID</label>
+                            <input [value]="entries.cod" class="form-control" type="text" class="form-control"
+                                id="exampleInputId" aria-describedby="emailHelp">
+                        </div>
+                        <label for="exampleInputEmail1">Name:</label>
+
+                        <input class="form-control" [value]="entries.name" for="" name="name" id="name"
+                            placeholder="Name here!">
+                        <label for="exampleInputEmail1">Descriptions:</label>
+
+                        <textarea class="form-control" [value]="entries.desc" name="desc" id="desc" cols="10" rows="5"
+                            placeholder="Descriptions here!">  </textarea>
+                        <button type="submit" class="btn btn-success btn-block btn-sm">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</ng-template>
